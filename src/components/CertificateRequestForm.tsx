@@ -119,7 +119,7 @@ export function CertificateRequestForm() {
             formData.append("position", values.position)
             formData.append("photo", values.photo)
 
-            const response = await fetch("https://n8n.pupuia.com/webhook-test/b7570bea-d1e6-4bcd-b18e-0a30a2450644", {
+            const response = await fetch("https://n8n.pupuia.com/webhook/b7570bea-d1e6-4bcd-b18e-0a30a2450644", {
                 method: "POST",
                 body: formData,
             })
@@ -360,7 +360,7 @@ export function CertificateRequestForm() {
                                                 <SelectItem value="Experto">Experto</SelectItem>
                                                 <SelectItem value="Senior">Senior</SelectItem>
                                                 <SelectItem value="Idóneo">Idóneo</SelectItem>
-                                                <SelectItem value="Participante nobel">Participante nobel</SelectItem>
+                                                <SelectItem value="Participante nobel">Participante novel</SelectItem>
                                             </SelectContent>
                                         </Select>
                                         <FormMessage />
