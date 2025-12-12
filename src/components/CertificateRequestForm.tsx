@@ -28,6 +28,7 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import { useState } from "react"
+import { API_BASE_URL, API_ENDPOINTS } from "@/config/api"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
 // Country codes for phone number
@@ -68,7 +69,7 @@ const formSchema = z.object({
     phoneNumber: z.string().min(6, {
         message: "Ingrese un número de teléfono válido.",
     }),
-    juryLevel: z.enum(["Notable", "Experto", "Senior", "Idóneo", "Participante nobel"]),
+    juryLevel: z.enum(["Notable", "Experto", "Senior", "Idóneo", "Participante novel"]),
     company: z.string().min(2, {
         message: "Ingrese el nombre de la empresa.",
     }),
@@ -119,13 +120,15 @@ export function CertificateRequestForm() {
             formData.append("position", values.position)
             formData.append("photo", values.photo)
 
-            const response = await fetch("https://n8n.pupuia.com/webhook/b7570bea-d1e6-4bcd-b18e-0a30a2450644", {
+            const response = await fetch(`${API_BASE_URL}${API_ENDPOINTS.createRequest}`, {
                 method: "POST",
                 body: formData,
             })
 
-            if (!response.ok) {
-                throw new Error("Error al enviar la solicitud. Por favor intente nuevamente.")
+            const data = await response.json()
+
+            if (!response.ok || !data.success) {
+                throw new Error(data.error || "Error al enviar la solicitud. Por favor intente nuevamente.")
             }
 
             setIsSubmitted(true)
@@ -297,7 +300,7 @@ export function CertificateRequestForm() {
                                                         </FormControl>
                                                         <SelectContent>
                                                             {COUNTRY_CODES.map((country) => (
-                                                                <SelectItem key={country.code} value={country.code}>
+                                                                <SelectItem key={country.code} value={country.dialCode}>
                                                                     {country.label}
                                                                 </SelectItem>
                                                             ))}
@@ -360,7 +363,7 @@ export function CertificateRequestForm() {
                                                 <SelectItem value="Experto">Experto</SelectItem>
                                                 <SelectItem value="Senior">Senior</SelectItem>
                                                 <SelectItem value="Idóneo">Idóneo</SelectItem>
-                                                <SelectItem value="Participante nobel">Participante novel</SelectItem>
+                                                <SelectItem value="Participante novel">Participante novel</SelectItem>
                                             </SelectContent>
                                         </Select>
                                         <FormMessage />
