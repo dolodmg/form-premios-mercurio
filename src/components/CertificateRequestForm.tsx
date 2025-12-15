@@ -408,6 +408,24 @@ export function CertificateRequestForm() {
                                         <FormLabel>Foto</FormLabel>
                                         <FormControl>
                                             <div className="space-y-4">
+                                                {/* Tips para la foto */}
+                                                <Alert className="bg-blue-50 border-blue-200">
+                                                    <AlertCircle className="h-4 w-4 text-blue-600" />
+                                                    <AlertTitle className="text-blue-900 font-semibold">
+                                                        Consejos para una buena foto
+                                                    </AlertTitle>
+                                                    <AlertDescription className="text-blue-800 space-y-2 mt-2">
+                                                        <ul className="list-disc list-inside space-y-1 text-sm">
+                                                            <li><strong>Formato:</strong> La foto debe tener proporción 4:3 (horizontal)</li>
+                                                            <li><strong>Iluminación:</strong> Asegúrese de que la foto esté bien iluminada</li>
+                                                            <li><strong>Distancia:</strong> Tome la foto de cerca, tipo retrato</li>
+                                                            <li><strong>Posición:</strong> Su cara debe estar centrada en la imagen</li>
+                                                            <li><strong>Calidad:</strong> Use una foto clara y nítida</li>
+                                                            <li><strong>Vista previa:</strong> La imagen circular que aparece al seleccionar la foto muestra cómo se verá en el diploma</li>
+                                                        </ul>
+                                                    </AlertDescription>
+                                                </Alert>
+
                                                 <div className="flex items-center gap-4">
                                                     <Input
                                                         type="file"
@@ -419,11 +437,11 @@ export function CertificateRequestForm() {
                                                     <Upload className="h-5 w-5 text-muted-foreground" />
                                                 </div>
                                                 {photoPreview && (
-                                                    <div className="flex justify-center">
+                                                    <div className="flex justify-center aspect-[1/1] w-40 overflow-hidden mx-auto">
                                                         <img
                                                             src={photoPreview}
                                                             alt="Vista previa"
-                                                            className="w-32 h-32 object-cover rounded-lg border-2 border-border"
+                                                            className="w-full h-full object-cover rounded-full border-2 border-border"
                                                         />
                                                     </div>
                                                 )}
