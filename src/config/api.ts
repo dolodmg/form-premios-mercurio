@@ -11,6 +11,7 @@ export const API_ENDPOINTS = {
     updateRequest: (id: string) => `/admin/requests/${id}`,
     deleteRequest: (id: string) => `/admin/requests/${id}`,
     getPhoto: (id: string) => `/admin/requests/${id}/photo`,
+    getCertificate: (id:string) => `/admin/certificates/${id}`,
     generateCertificate: (id: string) => `/admin/certificates/generate/${id}`,
     downloadCertificate: (id: string) => `/admin/certificates/download/${id}`,
     resendCertificate: (id: string) => `/admin/certificates/resend/${id}`,

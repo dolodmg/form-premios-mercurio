@@ -272,6 +272,21 @@ export function AdminDashboard() {
         }
     }
 
+    const handleGetCertificate = (id: string) => {
+        if (!id) {
+            alert('No hay certificado disponible')
+            return
+        }
+
+        try {
+            const certificateUrl = `${API_BASE_URL}${API_ENDPOINTS.getCertificate(id)}`
+            window.open(certificateUrl, '_blank')
+        } catch (err) {
+            console.error(err)
+            alert('Error al abrir el certificado')
+        }
+    }
+
 
     if (isLoading) {
         return (
@@ -362,7 +377,7 @@ export function AdminDashboard() {
                                                 <TableCell className="font-medium">{request.first_name}</TableCell>
                                                 <TableCell>{request.last_name}</TableCell>
                                                 <TableCell>{request.dni}</TableCell>
-                                                <TableCell className="max-w-[200px] truncate">{request.email}</TableCell>
+                                                <TableCell className="max-w-[150px] truncate">{request.email}</TableCell>
                                                 <TableCell className="whitespace-nowrap">
                                                     {request.phone_country_code} {request.phone_area_code} {request.phone_number}
                                                 </TableCell>
@@ -372,12 +387,11 @@ export function AdminDashboard() {
                                                 <TableCell>
                                                     <Button
                                                         size="sm"
-                                                        variant="outline"
+                                                        variant="ghost"
                                                         onClick={() => handleViewImage(request.id)}
                                                         className="whitespace-nowrap"
                                                     >
-                                                        <Eye className="mr-1 h-3 w-3" />
-                                                        Ver foto
+                                                        <Eye className="h-3 w-3" />
                                                     </Button>
                                                 </TableCell>
                                                 <TableCell>
@@ -391,15 +405,15 @@ export function AdminDashboard() {
                                                     </Button>
                                                 </TableCell>
                                                 <TableCell>
-                                                    {request.certificate_path || request.status === 'generated' || request.status === 'sent' ? (
+                                                    {request.status === 'generated' || request.status === 'sent' ? (
                                                         <Button
                                                             size="sm"
                                                             variant="outline"
-                                                            className="whitespace-nowrap border-green-500 text-green-600 hover:bg-green-50"
-                                                            disabled
+                                                            className="whitespace-nowrap border-green-500 text-green-600 hover:bg-green-50 cursor-pointer"
+                                                            onClick={() => handleGetCertificate(request.id.toString())}
                                                         >
                                                             <FileCheck className="mr-1 h-3 w-3" />
-                                                            Generado
+                                                            Abrir
                                                         </Button>
                                                     ) : (
                                                         <Button
